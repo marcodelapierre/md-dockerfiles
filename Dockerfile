@@ -31,15 +31,17 @@ RUN yum install -y automake \
 ENV tensorflow_root=/opt/tensorflow xdrfile_root=/opt/xdrfile \
     deepmd_root=/opt/deepmd deepmd_source_dir=/root/deepmd-kit \
     PATH="/opt/conda3/bin:${PATH}"
+ARG tensorflow_version=1.5
+ENV tensorflow_version=$tensorflow_version
 # If download lammps with git, there will be errors during installion. Hence we'll download lammps later on.
 RUN cd /root && \
     git clone https://github.com/deepmodeling/deepmd-kit.git deepmd-kit && \
     git clone https://github.com/tensorflow/tensorflow tensorflow && \
-    cd tensorflow && git checkout r1.4
+    cd tensorflow && git checkout "r$tensorflow_version"
 # install tensorflow C lib
 COPY install_input /root/tensorflow
 RUN cd /root/tensorflow && ./configure < install_input &&  bazel build -c opt \
-    --incompatible_load_argument_is_label=false \
+    # --incompatible_load_argument_is_label=false \
     --copt=-msse4.2 --verbose_failures //tensorflow:libtensorflow_cc.so 
 # install the dependencies of tensorflow and xdrfile
 COPY install*.sh copy_lib.sh /root/
@@ -57,5 +59,5 @@ RUN cd /root && wget https://codeload.github.com/lammps/lammps/tar.gz/patch_31Ma
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     sh Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda3/ && \
     conda config --add channels conda-forge && \
-    conda install -c conda-forge -y tensorflow 
+    conda install -c conda-forge -y tensorflow=$tensorflow_version
 CMD ["/bin/bash"]
