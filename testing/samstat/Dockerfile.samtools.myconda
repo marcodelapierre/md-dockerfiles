@@ -1,0 +1,32 @@
+################## BASE IMAGE ######################
+
+FROM biocontainers/biocontainers:latest
+
+################## METADATA ######################
+LABEL base_image="biocontainers:latest"
+LABEL version="1"
+LABEL software="SAMStat"
+LABEL software.version="1.5.x"
+LABEL about.summary="SAMStat displays various properties of next-generation sequencing reads stored in SAM/BAM format"
+LABEL about.home="https://github.com/TimoLassmann/samstat"
+LABEL about.documentation="https://github.com/TimoLassmann/samstat"
+LABEL about.license_file="https://github.com/TimoLassmann/samstat"
+LABEL about.license_file="https://github.com/TimoLassmann/samstat/blob/master/COPYING"
+LABEL about.license="GPL-3"
+LABEL about.tags="Genomics"
+LABEL extra.identifiers.biotools="samstat"
+
+################## MAINTAINER ######################
+MAINTAINER Marco De La Pierre <marco.delapierre@gmail.com>
+
+RUN conda create -n myconda && \
+	conda install -c conda-forge -n myconda samtools=1.9
+
+# this needs to go in the previous step, just testing now
+ENV PATH=/opt/conda/envs/myconda/bin:$PATH CONDA_DEFAULT_ENV=myconda CONDA_PREFIX=/opt/conda/envs/myconda
+
+#USER root
+#USER biodocker
+WORKDIR /data/
+
+CMD ["samstat"]
