@@ -35,25 +35,25 @@ RUN apt-get clean all && \
         apt-get purge && \
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ARG MINICONDA_VER="4.5.4"
+
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-4.5.4-Linux-x86_64.sh -O ~/miniconda.sh && \
+    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-${MINICONDA_VER}-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     chmod 777 -R /opt/conda
 
 RUN mkdir /data /build
 
-RUN groupadd fuse && \
-    useradd --create-home --shell /bin/bash --user-group --uid 1000 --groups sudo,fuse bio && \
+RUN useradd --create-home --shell /bin/bash --user-group --uid 1000 --groups sudo bio && \
     echo `echo "bio\nbio\n" | passwd bio` && \
+    mkdir /home/bio/bin && \
     chown bio:bio /data && \
     chown bio:bio /build
 
 USER bio
 
 ENV PATH=$PATH:/opt/conda/bin PATH=$PATH:/home/bio/bin HOME=/home/bio
-
-RUN mkdir /home/bio/bin
 
 RUN conda config --add channels r && \
     conda config --add channels bioconda && \
