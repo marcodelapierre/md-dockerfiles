@@ -31,7 +31,7 @@ RUN apt-get clean all && \
         wget            \
         vim             \
         zip             \
-        apt-get clean all && \
+        && apt-get clean all && \
         apt-get purge && \
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -43,23 +43,28 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     rm ~/miniconda.sh && \
     chmod 777 -R /opt/conda
 
-RUN mkdir /data /build
+RUN mkdir /data /build /apps
 
 RUN useradd --create-home --shell /bin/bash --user-group --uid 1000 --groups sudo bio && \
     echo `echo "bio\nbio\n" | passwd bio` && \
     mkdir /home/bio/bin && \
     chown bio:bio /data && \
-    chown bio:bio /build
+    chown bio:bio /build && \
+    chown bio:bio /apps
 
 USER bio
 
-ENV PATH=$PATH:/opt/conda/bin PATH=$PATH:/home/bio/bin HOME=/home/bio
+ENV PATH=$PATH:/opt/conda/bin
 
-RUN conda config --add channels r && \
+RUN conda config --add channels conda-forge && \
+    conda config --add channels r && \
     conda config --add channels bioconda && \
-    conda upgrade conda
+    conda upgrade conda && \
+    conda create -n myconda
 
-VOLUME ["/data", "/build"]
+ENV PATH=/opt/conda/envs/myconda/bin:$PATH CONDA_DEFAULT_ENV=myconda CONDA_PREFIX=/opt/conda/envs/myconda
+
+VOLUME ["/data", "/build","/apps"]
 
 WORKDIR /data
 
