@@ -43,14 +43,13 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     rm ~/miniconda.sh && \
     chmod 777 -R /opt/conda
 
-RUN mkdir /data /build /apps
+RUN mkdir /data /build
 
 RUN useradd --create-home --shell /bin/bash --user-group --uid 1000 --groups sudo bio && \
     echo `echo "bio\nbio\n" | passwd bio` && \
     mkdir /home/bio/bin && \
     chown bio:bio /data && \
-    chown bio:bio /build && \
-    chown bio:bio /apps
+    chown bio:bio /build
 
 USER bio
 
@@ -64,7 +63,7 @@ RUN conda config --add channels conda-forge && \
 
 ENV PATH=/opt/conda/envs/myconda/bin:$PATH CONDA_DEFAULT_ENV=myconda CONDA_PREFIX=/opt/conda/envs/myconda
 
-VOLUME ["/data", "/build","/apps"]
+VOLUME ["/data", "/build"]
 
 WORKDIR /data
 
