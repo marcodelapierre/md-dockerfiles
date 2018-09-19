@@ -123,7 +123,7 @@ Also, this container will handle auto-renewing the certificates
 
 ### Jupyter Notebook container
 
-This container sets up our Jupyter Notebook server.  In this case, we're using the latest version of the [scipy-notebook](https://hub.docker.com/r/jupyter/scipy-notebook/) image, but you can change this to a preferred version, see https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html
+This container sets up our Jupyter Notebook server.  In this case, we're using the latest version of the [scipy-notebook](https://hub.docker.com/r/jupyter/scipy-notebook/) image, but you can change this to a preferred version, see [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html).
 
 This section of `docker-compose.yml` will require some modification by the user:
 
