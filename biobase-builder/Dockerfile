@@ -24,16 +24,16 @@ RUN apt-get clean all && \
         git             \
         grep            \
         pkg-config      \
-	python-dev      \
+        python-dev      \
         python-minimal  \
         python-pip      \
         sed             \
         wget            \
         vim             \
         zip             \
-        && apt-get clean all && \
-        apt-get purge && \
-        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && apt-get clean all && \
+    apt-get purge && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG MINICONDA_VER="4.5.4"
 
