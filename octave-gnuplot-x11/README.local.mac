@@ -1,0 +1,14 @@
+# Local - Mac
+# docker images needs xauth in it, e.g. for ubuntu apt-get install xauth
+docker pull marcodelapierre/octave_gnuplot
+docker tag marcodelapierre/octave_gnuplot octa
+# 1st time only
+# needs mod in XQuartz Security preferences: tick both Authenticate connections and Allow connections from network clients
+XAUTH=/tmp/.docker.xauth
+sudo touch $XAUTH
+sudo chown $USER $XAUTH
+chmod 600 $XAUTH
+# routinely
+XAUTH=/tmp/.docker.xauth
+xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+docker run --rm -it -e DISPLAY=docker.for.mac.localhost:0 -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa bash
