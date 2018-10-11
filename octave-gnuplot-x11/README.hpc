@@ -1,0 +1,16 @@
+# HPC - Zeus
+# docker images needs xauth in it, e.g. for ubuntu apt-get install xauth
+module load shifter
+shifter pull marcodelapierre/octave_gnuplot
+# 1st time only
+XAUTH=$MYGROUP/.docker.xauth
+touch $XAUTH
+chmod 600 $XAUTH
+# routinely
+export XAUTH=$MYGROUP/.docker.xauth
+xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/\1/"`
+export XAUTHORITY=$XAUTH
+export DISPLAY
+module load shifter
+shifter run marcodelapierre/octave_gnuplot bash
