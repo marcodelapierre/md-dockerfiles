@@ -13,4 +13,4 @@ XAUTH=/tmp/.docker.xauth
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 DOCKERIP=$(ifconfig docker0 | grep inet | awk '$1=="inet" {print $2}')
 DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/$DOCKERIP\1/"`
-docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa bash
+docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa
