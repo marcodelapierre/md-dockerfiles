@@ -13,7 +13,6 @@ XAUTH=/tmp/.docker.xauth
 xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 docker run --rm -it -e DISPLAY=docker.for.mac.localhost:0 -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH gnup
 
-
 ### SUPPORT FOR MULTIPLE INSTANCES
 ### use the command tty to inspect the format of the tty IDs. for instance strings in the format ttys001
 # one time only
@@ -23,7 +22,6 @@ for i in $(seq -w 1 20) ; do
  sudo chown $USER $XAUTH
  chmod 600 $XAUTH
 done
-
 # routinely
 XAUTH=/tmp/.docker.xauth.$(basename $(tty))
 xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -

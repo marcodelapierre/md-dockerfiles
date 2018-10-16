@@ -1,5 +1,6 @@
 # HPC - Zeus
 # docker images needs xauth in it, e.g. for ubuntu apt-get install xauth
+export GNUTERM=x11
 module load shifter
 shifter pull marcodelapierre/octave_gnuplot
 # 1st time only
@@ -8,6 +9,23 @@ touch $XAUTH
 chmod 600 $XAUTH
 # routinely
 export XAUTH=$MYGROUP/.docker.xauth
+xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/\1/"`
+export XAUTHORITY=$XAUTH
+export DISPLAY
+module load shifter
+shifter run marcodelapierre/octave_gnuplot bash
+
+### SUPPORT FOR MULTIPLE INSTANCES
+### use the command tty to inspect the format of the tty IDs. for instance numbers starting from 0
+# one time only
+for i in $(seq 0 200) ; do
+ XAUTH=$MYGROUP/.docker.xauth.$i
+ touch $XAUTH
+ chmod 600 $XAUTH
+done
+# routinely
+export XAUTH=$MYGROUP/.docker.xauth.$(basename $(tty))
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/\1/"`
 export XAUTHORITY=$XAUTH

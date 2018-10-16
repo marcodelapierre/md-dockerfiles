@@ -15,7 +15,6 @@ DOCKERIP=$(ifconfig docker0 | grep inet | awk '$1=="inet" {print $2}')
 DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/$DOCKERIP\1/"`
 docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH gnup
 
-
 ### SUPPORT FOR MULTIPLE INSTANCES
 ### use the command tty to inspect the format of the tty IDs. for instance numbers starting from 0
 # one time only
@@ -25,7 +24,6 @@ for i in $(seq 0 9) ; do
  sudo chown $USER $XAUTH
  sudo chmod 600 $XAUTH
 done
-
 # routinely
 XAUTH=/tmp/.docker.xauth.$(basename $(tty))
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
