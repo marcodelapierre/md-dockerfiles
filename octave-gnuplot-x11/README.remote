@@ -13,7 +13,7 @@ XAUTH=/tmp/.docker.xauth
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 DOCKERIP=$(ifconfig docker0 | grep inet | awk '$1=="inet" {print $2}')
 DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/$DOCKERIP\1/"`
-docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa
+docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa octave-cli
 
 ### SUPPORT FOR MULTIPLE INSTANCES
 ### use the command tty to inspect the format of the tty IDs. for instance numbers starting from 0
@@ -29,4 +29,4 @@ XAUTH=/tmp/.docker.xauth.$(basename $(tty))
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 DOCKERIP=$(ifconfig docker0 | grep inet | awk '$1=="inet" {print $2}')
 DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/$DOCKERIP\1/"`
-docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa
+docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH octa octave-cli
