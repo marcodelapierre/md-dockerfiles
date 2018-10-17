@@ -34,9 +34,9 @@ RUN mkdir /apps && \
 	cd pomoxis && \
 	make install
 
-RUN echo "#!/bin/bash -i" >/usr/local/bin/init.sh && \
+RUN echo "#!/bin/bash" >/usr/local/bin/init.sh && \
 	echo ". /apps/pomoxis/venv/bin/activate" >>/usr/local/bin/init.sh && \
-    echo "bash -c \"\$@\"" >>/usr/local/bin/init.sh && \
+    echo "exec \"\$@\"" >>/usr/local/bin/init.sh && \
     chmod +x /usr/local/bin/init.sh && \
     ln -s /usr/local/bin/init.sh /
 
