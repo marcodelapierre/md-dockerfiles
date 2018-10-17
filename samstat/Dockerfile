@@ -14,8 +14,6 @@ RUN wget https://sourceforge.net/projects/samstat/files/samstat-1.5.1.tar.gz && 
 	make && \
 	cp src/samstat /opt/conda/envs/myconda/bin/
 
-CMD ["bash"]
-
 
 ### PRODUCTION STAGE
 
@@ -38,5 +36,3 @@ RUN apt-get clean all && \
 USER bio
 
 COPY --from=builder /opt/conda/envs/myconda /usr/local/
-
-CMD ["/bin/bash"]

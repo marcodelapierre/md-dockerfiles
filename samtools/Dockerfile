@@ -6,8 +6,6 @@ MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
 
 RUN conda install -c conda-forge -n myconda samtools=1.9
 
-CMD ["bash"]
-
 
 ### PRODUCTION STAGE
 
@@ -30,5 +28,3 @@ RUN apt-get clean all && \
 USER bio
 
 COPY --from=builder /opt/conda/envs/myconda /usr/local/
-
-CMD ["/bin/bash"]
