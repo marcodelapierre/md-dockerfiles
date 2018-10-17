@@ -1,7 +1,0 @@
-wget https://sourceforge.net/projects/samstat/files/samstat-1.5.1.tar.gz
-tar xzf samstat-1.5.1.tar.gz 
-cd samstat-1.5.1
-./configure
-make clean
-make 
-cp -p src/samstat /usr/local/bin
