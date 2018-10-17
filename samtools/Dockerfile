@@ -31,5 +31,4 @@ USER bio
 
 COPY --from=builder /opt/conda/envs/myconda /usr/local/
 
-CMD ["samstat"]
-
+CMD ["/bin/bash"]
