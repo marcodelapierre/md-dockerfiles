@@ -12,7 +12,7 @@ RUN apt-get clean all && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN echo "#!/bin/bash -i" >/usr/local/bin/init.sh && \
-	echo "gnuplot" >>/usr/local/bin/init.sh && \
+	echo "gnuplot \$@" >>/usr/local/bin/init.sh && \
 	chmod +x /usr/local/bin/init.sh && \
 	ln -s /usr/local/bin/init.sh /
 
