@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
+
 RUN apt-get clean all && \
 	apt-get update && \
 	apt-get upgrade -y && \
