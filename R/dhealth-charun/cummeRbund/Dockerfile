@@ -15,3 +15,5 @@ RUN apt-get clean all && \
 RUN Rscript -e "install.packages('shiny')" \
 		-e "source('https://bioconductor.org/biocLite.R')" \
 		-e "biocLite('cummeRbund')"
+
+USER rstudio
