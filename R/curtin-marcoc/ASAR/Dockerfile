@@ -58,8 +58,8 @@ RUN Rscript -e "install.packages('shiny', dependencies = TRUE)" \
 
 RUN cd /home/rstudio && \
 	git clone https://github.com/Askarbek-orakov/ASAR.git && \
-	sed -i 's/srun //g' ASAR/*.* && \
-	sed -i 's/sbatch //g' ASAR/*.* && \
+	sed -i 's/srun //g' ASAR/bash/*.* && \
+	sed -i 's/sbatch //g' ASAR/bash/*.* && \
 	chown -R rstudio:rstudio /home/rstudio/ASAR
 
 USER rstudio
