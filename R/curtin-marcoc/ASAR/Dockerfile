@@ -61,5 +61,3 @@ RUN cd /home/rstudio && \
 	sed -i 's/srun //g' ASAR/bash/*.* && \
 	sed -i 's/sbatch //g' ASAR/bash/*.* && \
 	chown -R rstudio:rstudio /home/rstudio/ASAR
-
-USER rstudio
