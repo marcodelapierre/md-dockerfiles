@@ -23,7 +23,7 @@ You'll also need a domain (or subdomain) name for your Nimbus VM; you can create
 
 More detail about each part is given below, but for those who just want to get up and running, here's what you need to do:
 
-* Clone this [repository](https://github.com/marcodelapierre/bio-docker)
+* Clone this [repository](https://github.com/marcodelapierre/md-dockerfiles)
 * Enter directory `jupyter-nginx`
 * Edit `docker-compose.yml`
 	* Change `VIRTUAL_HOST` and `LETSENCRYPT_HOST` to your domain name
