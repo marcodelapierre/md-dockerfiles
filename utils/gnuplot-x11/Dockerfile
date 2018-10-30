@@ -13,11 +13,7 @@ RUN apt-get clean all && \
 	apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN echo "#!/bin/bash" >/usr/local/bin/init.sh && \
-	echo "export GNUTERM=x11" >>/usr/local/bin/init.sh && \
-	echo "exec \"\$@\"" >>/usr/local/bin/init.sh && \
-	chmod +x /usr/local/bin/init.sh && \
-	ln -s /usr/local/bin/init.sh /
+ENV GNUTERM=x11
 
 RUN mkdir /data
 
@@ -31,5 +27,4 @@ RUN echo "set colors classic" >~/.gnuplot
 VOLUME ["/data"]
 WORKDIR /data
 
-ENTRYPOINT ["init.sh"]
 CMD ["/bin/bash"]
