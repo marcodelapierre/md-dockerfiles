@@ -8,4 +8,4 @@ Thanks to @[TimChen314](https://github.com/TimChen314) for the inital creation o
 `cd deepmd-kit_docker && docker build -f Dockerfile -t deepmd-kit_docker .`   
 It will take a few minutes to download necessary package and install them.   
 The `ENV` statement in Dockerfile sets the install prefix of packages. These environment variables can be set by users themselves.
-The `ARG tensorflow_version` specifies the version of tensorflow to install, which can be set during the build command through `--build-arg tensorflow_version=1.5`.
+The `ARG tensorflow_version` specifies the version of tensorflow to install, which can be set during the build command through `--build-arg tensorflow_version=1.8`.

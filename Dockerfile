@@ -1,6 +1,6 @@
 From centos:7
 LABEL maintainer "Tim Chen timchen314@163.com"
-# For now, only CentOS-Base.repo (USTC source, only users in China mainland should use it) and bazel.repo are in 'repo' directory. 
+# For now, only CentOS-Base.repo (USTC source, only users in China mainland should use it) and bazel.repo are in 'repo' directory with version 0.13.1. The latest version of bazel may bring failures to the installment.
 COPY repo/*repo /etc/yum.repos.d/
 # Add additional source to yum
 RUN yum makecache && yum install -y epel-release \
@@ -31,7 +31,7 @@ RUN yum install -y automake \
 ENV tensorflow_root=/opt/tensorflow xdrfile_root=/opt/xdrfile \
     deepmd_root=/opt/deepmd deepmd_source_dir=/root/deepmd-kit \
     PATH="/opt/conda3/bin:${PATH}"
-ARG tensorflow_version=1.5
+ARG tensorflow_version=1.8
 ENV tensorflow_version=$tensorflow_version
 # If download lammps with git, there will be errors during installion. Hence we'll download lammps later on.
 RUN cd /root && \
