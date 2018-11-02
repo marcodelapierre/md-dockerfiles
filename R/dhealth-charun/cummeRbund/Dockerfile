@@ -7,6 +7,7 @@ RUN apt-get clean all && \
 	apt-get upgrade -y && \
 	apt-get install -y \
 		libxml2-dev \
+		vim \
 		zlib1g-dev \
 	&& apt-get clean all && \
 	apt-get purge && \
