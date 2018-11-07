@@ -24,11 +24,14 @@ RUN apt-get clean all && \
 		vim \
 	&& apt-get clean all && \
 	apt-get purge && \
-	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-	chmod go+w /var/lib/texmf/web2c && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN chmod go+w /var/lib/texmf/web2c && \
 	su rstudio -c "tlmgr init-usertree" && \
-	su rstudio -c "tlmgr install framed" && \
-	su rstudio -c "tlmgr install titling"
+	su rstudio -c "tlmgr --usermode install framed titling" && \
+	tlmgr --usertree /usr/local/tex init-usertree && \
+	tlmgr --usermode --usertree /usr/local/tex install framed titling 
+ENV TEXMFHOME="/usr/local/tex"
 
 RUN Rscript -e "install.packages('shiny', dependencies = TRUE)" \
 		-e "install.packages('devtools', dependencies = TRUE)" \
@@ -60,4 +63,5 @@ RUN cd /home/rstudio && \
 	git clone https://github.com/Askarbek-orakov/ASAR.git && \
 	sed -i 's/srun //g' ASAR/bash/*.* && \
 	sed -i 's/sbatch /bash /g' ASAR/bash/*.* && \
-	chown -R rstudio:rstudio /home/rstudio/ASAR
+	chown -R rstudio:rstudio /home/rstudio/ASAR && \
+	chmod -R g+w /home/rstudio/ASAR 
