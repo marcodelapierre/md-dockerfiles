@@ -2,6 +2,8 @@
 # docker images needs xauth in it, e.g. for ubuntu apt-get install xauth
 docker pull marcodelapierre/gnuplot
 docker tag marcodelapierre/gnuplot gnup
+# also, this setting is required in /etc/ssh/sshd_config: X11UseLocalhost no
+
 # 1st time only
 # needs mod in /etc/ssh/sshd_config : X11UseLocalhost no
 XAUTH=/tmp/.docker.xauth
