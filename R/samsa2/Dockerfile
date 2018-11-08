@@ -6,6 +6,7 @@ RUN apt-get clean all && \
 	apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y \
+		default-jre \
 		libxml2-dev \
 		vim \
 		zlib1g-dev \
