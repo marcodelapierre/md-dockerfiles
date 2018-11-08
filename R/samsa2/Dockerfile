@@ -1,12 +1,19 @@
-FROM rocker/tidyverse:3.5.1
+FROM rocker/rstudio:3.5.1
 
 MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
 
-RUN apt-get update && \
+RUN apt-get clean all && \
+	apt-get update && \
+	apt-get upgrade -y && \
 	apt-get install -y \
+		libxml2-dev \
 		vim \
+		zlib1g-dev \
 	&& apt-get clean all && \
-	rm -rf /var/lib/apt/lists/*
+	apt-get purge && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN Rscript -e "install.packages('shiny')"
 
 RUN mkdir /apps && \
 	cd /apps && \
