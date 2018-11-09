@@ -59,9 +59,9 @@ RUN Rscript -e "install.packages('shiny', dependencies = TRUE)" \
 		-e "install.packages('xtable', dependencies = TRUE)" \
 		-e "install.packages('taxize', dependencies = TRUE)"
 
-RUN cd /home/rstudio && \
+RUN mkdir /apps && \
+	cd /apps && \
 	git clone https://github.com/Askarbek-orakov/ASAR.git && \
 	sed -i 's/srun //g' ASAR/bash/*.* && \
 	sed -i 's/sbatch /bash /g' ASAR/bash/*.* && \
-	chown -R rstudio:rstudio /home/rstudio/ASAR && \
-	chmod -R g+w /home/rstudio/ASAR 
+	chmod -R a+rwX ASAR 
