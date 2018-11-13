@@ -21,9 +21,8 @@ RUN mkdir /apps && \
 	git clone --branch 2.1.0 https://github.com/transcript/samsa2.git && \
 	mkdir /apps/samsa2/full_databases && \
 	chmod +x /apps/samsa2/bash_scripts/master_script.sh && \
-	bash /apps/samsa2/setup_and_test/package_installation.bash
-
-RUN chmod -R a+rwX /apps/samsa2 && \
+	bash /apps/samsa2/setup_and_test/package_installation.bash && \
+	chmod -R a+rwX /apps/samsa2 && \
 	sed -i -e 's/^INPUT_DIR=.*/INPUT_DIR=\$(pwd)/g' \
 	-e 's/^OUT_DIR=.*/OUT_DIR=\$(pwd)/g' \
 	/apps/samsa2/bash_scripts/master_script.sh
