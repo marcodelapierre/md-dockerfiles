@@ -23,8 +23,7 @@ RUN mkdir /apps && \
 	chmod +x /apps/samsa2/bash_scripts/master_script.sh && \
 	bash /apps/samsa2/setup_and_test/package_installation.bash
 
-RUN chmod a+rwX /apps/samsa2 /apps/samsa2/full_databases /apps/samsa2/logs && \
-	chmod -R a+rwX /apps/samsa2/sample_files_paired-end && \
+RUN chmod -R a+rwX /apps/samsa2 && \
 	sed -i -e 's/^INPUT_DIR=.*/INPUT_DIR=\$(pwd)/g' \
 	-e 's/^OUT_DIR=.*/OUT_DIR=\$(pwd)/g' \
 	/apps/samsa2/bash_scripts/master_script.sh
