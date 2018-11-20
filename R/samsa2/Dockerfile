@@ -14,7 +14,9 @@ RUN apt-get clean all && \
 	apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN Rscript -e "install.packages('shiny')"
+RUN Rscript -e "install.packages('shiny')" \
+		-e "install.packages('reshape')" \
+		-e "install.packages('pheatmap')"
 
 RUN mkdir /apps && \
 	cd /apps && \
