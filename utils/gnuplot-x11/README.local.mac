@@ -2,16 +2,6 @@
 # docker images needs xauth in it, e.g. for ubuntu apt-get install xauth
 docker pull marcodelapierre/gnuplot
 docker tag marcodelapierre/gnuplot gnup
-# 1st time only
-# needs mod in XQuartz Security preferences: tick both Authenticate connections and Allow connections from network clients
-XAUTH=/tmp/.docker.xauth
-sudo touch $XAUTH
-sudo chown $USER $XAUTH
-chmod 600 $XAUTH
-# routinely
-XAUTH=/tmp/.docker.xauth
-xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
-docker run --rm -it -e DISPLAY=docker.for.mac.localhost:0 -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH gnup gnuplot
 
 ### SUPPORT FOR MULTIPLE INSTANCES
 ### use the command tty to inspect the format of the tty IDs. for instance strings in the format ttys001

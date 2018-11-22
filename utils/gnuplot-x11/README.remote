@@ -4,19 +4,6 @@ docker pull marcodelapierre/gnuplot
 docker tag marcodelapierre/gnuplot gnup
 # also, this setting is required in /etc/ssh/sshd_config: X11UseLocalhost no
 
-# 1st time only
-# needs mod in /etc/ssh/sshd_config : X11UseLocalhost no
-XAUTH=/tmp/.docker.xauth
-sudo touch $XAUTH
-sudo chown $USER $XAUTH
-chmod 600 $XAUTH
-# routinely
-XAUTH=/tmp/.docker.xauth
-xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
-DOCKERIP=$(ifconfig docker0 | grep inet | awk '$1=="inet" {print $2}')
-DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/$DOCKERIP\1/"`
-docker run --rm -it -e DISPLAY=$DISPLAY -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH gnup gnuplot
-
 ### SUPPORT FOR MULTIPLE INSTANCES
 ### use the command tty to inspect the format of the tty IDs. for instance numbers starting from 0
 # one time only

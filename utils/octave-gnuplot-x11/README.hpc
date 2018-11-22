@@ -3,18 +3,6 @@
 export GNUTERM=x11
 module load shifter
 shifter pull marcodelapierre/octave_gnuplot
-# 1st time only
-XAUTH=$MYGROUP/.docker.xauth
-touch $XAUTH
-chmod 600 $XAUTH
-# routinely
-export XAUTH=$MYGROUP/.docker.xauth
-xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
-DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/\1/"`
-export XAUTHORITY=$XAUTH
-export DISPLAY
-module load shifter
-shifter run marcodelapierre/octave_gnuplot octave-cli
 
 ### SUPPORT FOR MULTIPLE INSTANCES
 ### use the command tty to inspect the format of the tty IDs. for instance numbers starting from 0
@@ -27,8 +15,8 @@ done
 # routinely
 export XAUTH=$MYGROUP/.docker.xauth.$(basename $(tty))
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
-DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/\1/"`
+#DISPLAY=`echo $DISPLAY | sed "s/^[^:]*\(.*\)/\1/"`
 export XAUTHORITY=$XAUTH
-export DISPLAY
+#export DISPLAY
 module load shifter
 shifter run marcodelapierre/octave_gnuplot octave-cli
