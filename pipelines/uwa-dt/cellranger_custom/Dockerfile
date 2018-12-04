@@ -14,7 +14,7 @@ RUN yum -y update \
     && yum clean all
 
 # Copy customised Cell Ranger into container
-# Assumes a folder with a Cell Ranger installation is available in the same directory of the Dockerfile
+# Assumes a folder called "cellranger", containing a Cell Ranger installation, is available in the same directory of the Dockerfile
 ARG CELLRANGER_VERSION="3.0.0-custom"
 
 RUN mkdir -p /apps/cellranger-${CELLRANGER_VERSION}/
