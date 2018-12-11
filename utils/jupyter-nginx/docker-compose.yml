@@ -39,7 +39,7 @@ services:
 
   jupyter:
     restart: always
-    image: jupyter/scipy-notebook:latest
+    image: jupyter/datascience-notebook:latest
     container_name: jupyter
     volumes:
       - <VOLUMES TO BE MOUNTED>
