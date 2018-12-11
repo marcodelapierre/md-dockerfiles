@@ -51,7 +51,7 @@ and have a fully functional, containerised Jupyter Notebook server running behin
 
 You will need to run `docker-compose logs`, grab the token from the output, and use it to login through the Web browser.
 
-To exit the container, run `docker-compose stop`, followed by `docker-compose rm`.
+To exit the container, run `docker-compose down`.
 
 Note that the `-d` flag means our containers will run in *detached mode* (in the background).  If you find your containers aren't working or you can't access Jupyter Notebook, run `docker-compose logs` to see debug output, or re-run `docker-compose` without the `-d`.
 
