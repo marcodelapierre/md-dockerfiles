@@ -43,7 +43,7 @@ services:
     container_name: jupyter
     volumes:
       - <VOLUMES TO BE MOUNTED>
-      - "$HOME/jupyter_data:/home/jovyan/work"
+      - "$HOME/jupyter_data:/home/jovyan/data"
     expose:
       - "8888"
     environment:
