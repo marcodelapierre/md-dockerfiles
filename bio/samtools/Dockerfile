@@ -4,7 +4,8 @@ FROM marcodelapierre/biobase-builder as builder
 
 MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
 
-RUN conda install -c conda-forge -n myconda samtools=1.9
+ARG SAM_VER="1.9"
+RUN conda install -c conda-forge -n myconda samtools=${SAM_VER}
 
 
 ### PRODUCTION STAGE
