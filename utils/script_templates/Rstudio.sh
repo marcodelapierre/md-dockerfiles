@@ -20,7 +20,8 @@ PASS="$((RANDOM))rstudiopwd$((RANDOM))"
 echo $PASS |pbcopy
 docker run --rm -d \
 	-p 8787:8787 -e PASSWORD=$PASS \
-	-v ~/Documents/rstudio:/home/rstudio/data \
+	-v /data/rstudio:/home/rstudio/data \
+	-e USERID=$UID \
 	--name rstudio \
 	$cont &>/dev/null
 sleep 5
