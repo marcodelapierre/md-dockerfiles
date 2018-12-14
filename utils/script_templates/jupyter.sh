@@ -20,7 +20,7 @@ fi
 docker stop jupyter &>/dev/null
 docker run --rm -d \
 	-p 8888:8888 \
-	-v /data/jupyter:/home/jovyan/data \
+	-v ~/Documents/jupyter:/home/jovyan/data \
 	-u $(id -u):$(id -g) --group-add users \
 	--name jupyter \
 	$cont &>/dev/null
