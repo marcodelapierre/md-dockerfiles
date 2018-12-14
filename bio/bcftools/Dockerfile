@@ -4,7 +4,8 @@ FROM marcodelapierre/biobase-builder as builder
 
 MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
 
-RUN conda install -c conda-forge -n myconda bcftools=1.9
+ARG BCF_VER="1.9"
+RUN conda install -c conda-forge -n myconda bcftools=${BCF_VER}
 
 
 ### PRODUCTION STAGE

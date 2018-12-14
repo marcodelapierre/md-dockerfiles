@@ -4,7 +4,8 @@ FROM marcodelapierre/biobase3-builder as builder
 
 MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
 
-RUN conda install -c conda-forge -n myconda cufflinks=2.2.1
+ARG CUFF_VER="2.2.1"
+RUN conda install -c conda-forge -n myconda cufflinks=${CUFF_VER}
 
 
 ### PRODUCTION STAGE
