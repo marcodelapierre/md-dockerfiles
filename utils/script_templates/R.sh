@@ -24,5 +24,6 @@ if [ $# -gt 0 ] ; then
 fi
 
 docker run --rm $flag \
-	-v $(echo ~):$(echo ~) -w $(pwd) \
+	-v /data:/data -w $(pwd) \
+	-u $(id -u):$(id -g) \
 	$cont $cmd $args

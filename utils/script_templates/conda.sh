@@ -14,5 +14,6 @@ else
 fi
 
 docker run --rm -it \
-	-v $(echo ~):$(echo ~) -w $(pwd) \
+	-v /data:/data -w $(pwd) \
+	-u $(id -u):$(id -g) \
 	$cont /bin/bash
