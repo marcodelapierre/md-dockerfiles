@@ -15,5 +15,4 @@ fi
 
 docker run --rm -it \
 	-v $(echo ~):$(echo ~) -w $(pwd) \
-	-u $(id -u):$(id -g) \
 	$cont /bin/bash

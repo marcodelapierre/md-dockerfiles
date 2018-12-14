@@ -6,6 +6,7 @@ type="${type%.sh}"
 type="${type#${pre}-}"
 
 flag="-it"
+userflags=""
 cmd="R"
 args=""
 if [ "$type" == "tidy" ] ; then
@@ -19,11 +20,12 @@ else
 fi
 if [ $# -gt 0 ] ; then
  flag=""
+ userflags="-u $(id -u):$(id -g)"
  cmd="Rscript"
  args="$@"
 fi
 
 docker run --rm $flag \
 	-v $(echo ~):$(echo ~) -w $(pwd) \
-	-u $(id -u):$(id -g) \
+	$userflags \
 	$cont $cmd $args
