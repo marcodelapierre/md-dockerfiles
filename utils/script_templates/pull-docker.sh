@@ -7,6 +7,7 @@ debian
 centos
 
 marcodelapierre/octave_gnuplot:4.2.2_5.2.2_2
+marcodelapierre/texlive_science:2017.20180305-1
 
 continuumio/miniconda:4.5.11
 continuumio/miniconda3:4.5.11
