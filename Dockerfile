@@ -38,7 +38,7 @@ RUN cd /root && \
     git clone https://github.com/tensorflow/tensorflow tensorflow && \
     cd tensorflow && git checkout "r$tensorflow_version"
 # install bazel for version 0.13.1
-RUN wget wget https://github.com/bazelbuild/bazel/releases/download/0.13.1/bazel-0.13.1-installer-linux-x86_64.sh && \
+RUN wget https://github.com/bazelbuild/bazel/releases/download/0.13.1/bazel-0.13.1-installer-linux-x86_64.sh && \
     bash bazel-0.13.1-installer-linux-x86_64.sh
 # install tensorflow C lib
 COPY install_input /root/tensorflow
