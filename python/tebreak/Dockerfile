@@ -54,6 +54,8 @@ ENV TB="/apps/tebreak" \
 
 RUN rm -rf /build && \
     mkdir /home/none && \
+    mkdir /home/none/.cache && \
     cp -p $HOME/.bashrc $HOME/.profile /home/none/ && \
     chmod -R go+w /home/none
+ENV HOME="/home/none"
 WORKDIR /data
