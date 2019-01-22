@@ -58,4 +58,5 @@ RUN rm -rf /build && \
     cp -p $HOME/.bashrc $HOME/.profile /home/none/ && \
     chmod -R go+w /home/none
 ENV HOME="/home/none"
+VOLUME /data
 WORKDIR /data
