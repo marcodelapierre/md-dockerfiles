@@ -1,6 +1,6 @@
 [vbatts-bazel]
 name=Copr repo for bazel owned by vbatts
-baseurl=https://copr-be.cloud.fedoraproject.org/results/vbatts/bazel/epel-7-$basearch/
+baseurl=https://copr-be.cloud.fedoraproject.org/results/vbatts/bazel/epel-7-x86_64/
 type=rpm-md
 skip_if_unavailable=True
 gpgcheck=1
