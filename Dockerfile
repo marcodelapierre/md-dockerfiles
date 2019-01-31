@@ -64,4 +64,6 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     sh Miniconda3-latest-Linux-x86_64.sh -b -p /apps/conda3/ && \
     conda config --add channels conda-forge && \
     conda install -c conda-forge -y tensorflow=$tensorflow_version
+ENV OMP_NUM_THREADS=1 \
+    PATH="/root/lammps-patch_31Mar2017/src:$PATH"
 CMD ["/bin/bash"]
