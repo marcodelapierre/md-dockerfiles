@@ -35,7 +35,7 @@ ENV source_dir="/source"
 ENV tensorflow_root="/apps/tensorflow" \
     xdrfile_root="/apps/xdrfile" \
     deepmd_root="/apps/deepmd" \
-    conda_root="/apps/conda3"
+    conda_root="/apps/conda3" \
     tensorflow_source="${source_dir}/tensorflow" \
     deepmd_source="${source_dir}/deepmd-kit"
 
