@@ -8,6 +8,7 @@ Thanks to @[TimChen314](https://github.com/TimChen314)
 and @[frankhan91](https://github.com/frankhan91)
 for the inital works on this docker project.
 
+
 ## Quick start 
 
 Clone this repo:
@@ -22,6 +23,9 @@ docker build -f Dockerfile -t deepmd-kit_docker .
 ```
 
 It can take up to a few hours to download necessary package and install them.
+
+
+## Notes
 
 The `ENV` statement in Dockerfile sets the install prefix of packages. These environment variables can be set by users themselves.
 
