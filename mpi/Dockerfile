@@ -6,13 +6,14 @@ RUN apt-get clean all && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
-      automake \
       autoconf \
+      automake \
       cmake \
+      curl \
       git \
       libtool \
       unzip \
-      vim && \
+      vim \
     && apt-get clean all && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

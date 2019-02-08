@@ -1,5 +1,4 @@
 #!/bin/sh
-alias cmake='cmake3'
 cd $source_dir
 git clone https://github.com/deepmodeling/deepmd-kit.git deepmd-kit
 
