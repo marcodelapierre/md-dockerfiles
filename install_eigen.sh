@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /root/tensorflow/tensorflow/contrib/makefile/downloads/eigen/
+cd ${tensorflow_source}/tensorflow/contrib/makefile/downloads/eigen/
 mkdir /tmp/eigen
 mkdir build_dir
 cd build_dir

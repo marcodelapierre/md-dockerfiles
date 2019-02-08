@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /root/tensorflow/
+cd $tensorflow_source
 mkdir -p $tensorflow_root/lib
 cp bazel-bin/tensorflow/libtensorflow_cc.so $tensorflow_root/lib/
 cp bazel-bin/tensorflow/libtensorflow_framework.so $tensorflow_root/lib/

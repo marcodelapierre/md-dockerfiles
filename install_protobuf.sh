@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /root/tensorflow
+cd $tensorflow_source
 mkdir /tmp/proto
 cd tensorflow/contrib/makefile/downloads/protobuf/
 ./autogen.sh

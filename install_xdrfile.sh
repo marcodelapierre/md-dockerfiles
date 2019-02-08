@@ -1,4 +1,4 @@
-cd /root
+cd $source_dir
 wget ftp://ftp.gromacs.org/pub/contrib/xdrfile-1.1.4.tar.gz
 tar xvf xdrfile-1.1.4.tar.gz
 cd xdrfile-1.1.4

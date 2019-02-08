@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /root/tensorflow/tensorflow/contrib/makefile/downloads/nsync/
+cd ${tensorflow_source}/tensorflow/contrib/makefile/downloads/nsync/
 mkdir /tmp/nsync
 mkdir build_dir
 cd build_dir
