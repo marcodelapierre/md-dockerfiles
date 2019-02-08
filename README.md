@@ -18,8 +18,8 @@ git clone https://github.com/marcodelapierre/deepmd-kit_docker.git
 
 Build the Docker image:
 ```
-cd deepmd-kit_docker
-docker build -f Dockerfile -t deepmd-kit .
+cd deepmd-kit_docker/omp
+docker build -f Dockerfile -t deepmd-kit_omp .
 ```
 
 It can take up to a few hours to download necessary package and install them.
