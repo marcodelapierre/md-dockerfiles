@@ -81,8 +81,8 @@ RUN cd "$source_dir" && \
     sh -x install_lammps.sh
 
 # install tensorflow in python3 module
-ENV conda_root="/apps/conda3" \
-    PATH="${conda_root}/bin:$PATH"
+ENV conda_root="/apps/conda3"
+ENV PATH="${conda_root}/bin:$PATH"
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     sh Miniconda3-latest-Linux-x86_64.sh -b -p "$conda_root" && \
     conda config --add channels conda-forge && \
