@@ -1,6 +1,5 @@
 #!/bin/sh
 cd $source_dir
-git clone https://github.com/deepmodeling/deepmd-kit.git deepmd-kit
 
 cd $deepmd_source/source
 mkdir build 

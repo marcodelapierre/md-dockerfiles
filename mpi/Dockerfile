@@ -27,7 +27,7 @@ ENV tensorflow_root="/apps/tensorflow" \
     tensorflow_source="${source_dir}/tensorflow" \
     deepmd_source="${source_dir}/deepmd-kit"
 
-ARG tensorflow_version="1.12"
+ARG tensorflow_version="1.8"
 ENV tensorflow_version="$tensorflow_version"
 
 ARG lammps_version="patch_31Mar2017"
@@ -38,9 +38,9 @@ RUN mkdir "$source_dir" && \
     git clone https://github.com/tensorflow/tensorflow tensorflow && \
     cd tensorflow && \
     git checkout "r$tensorflow_version"
-# install bazel for version 0.15.0
-RUN wget https://github.com/bazelbuild/bazel/releases/download/0.15.0/bazel-0.15.0-installer-linux-x86_64.sh && \
-    bash bazel-0.15.0-installer-linux-x86_64.sh
+# install bazel for version 0.13.1
+RUN wget https://github.com/bazelbuild/bazel/releases/download/0.13.1/bazel-0.13.1-installer-linux-x86_64.sh && \
+    bash bazel-0.13.1-installer-linux-x86_64.sh
 # install tensorflow C lib
 COPY install_input "$tensorflow_source"/
 RUN cd "$tensorflow_source" && \
@@ -79,12 +79,13 @@ RUN cd "$source_dir" && \
     sh -x install_lammps.sh
 
 # install tensorflow in python3 module
+ENV PATH="${conda_root}/bin:$PATH"
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     sh Miniconda3-latest-Linux-x86_64.sh -b -p "$conda_root" && \
     conda config --add channels conda-forge && \
     conda install -c conda-forge -y tensorflow="$tensorflow_version"
 
 ENV OMP_NUM_THREADS=1 \
-    PATH="${source_dir}/lammps-${lammps_version}/src:${deepmd_root}/bin:${conda_root}/bin:$PATH"
+    PATH="${source_dir}/lammps-${lammps_version}/src:${deepmd_root}/bin:$PATH"
 
 CMD ["/bin/bash"]
