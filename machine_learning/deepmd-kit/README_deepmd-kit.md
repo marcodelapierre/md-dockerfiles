@@ -13,13 +13,13 @@ for the inital works on this docker project.
 
 Clone this repo:
 ```
-git clone https://github.com/marcodelapierre/deepmd-kit_docker.git
+git clone https://github.com/marcodelapierre/md-dockerfiles.git
 ```
 
 Build the Docker image:
 ```
-cd deepmd-kit_docker/omp
-docker build -f Dockerfile -t deepmd-kit_omp .
+cd md-dockerfiles/machine_learning/deepmd-kit/mpi
+docker build -t deepmd-kit_mpi .
 ```
 
 It can take up to a few hours to download necessary package and install them.
@@ -27,6 +27,6 @@ It can take up to a few hours to download necessary package and install them.
 
 ## Notes
 
-The `ENV` statement in Dockerfile sets the install prefix of packages. These environment variables can be set by users themselves.
+The `ENV` statements in the Dockerfile set the install prefix for packages. These environment variables can be set by users themselves.
 
-The `ARG tensorflow_version` specifies the version of tensorflow to install, which can be set during the build command through `--build-arg tensorflow_version=1.8`.
+The `ARG` statements specify package versions to installed, which can be overwritten during the build command, for instance through `--build-arg deepmd_version=0.9.4`.
