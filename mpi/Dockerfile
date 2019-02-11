@@ -45,7 +45,9 @@ RUN cd "$tensorflow_source" && \
       //tensorflow:libtensorflow_cc.so 
 
 # install the dependencies of tensorflow and xdrfile
-ENV xdrfile_root="/apps/xdrfile"
+ARG xdrfile_version="1.1.4"
+ENV xdrfile_version="$xdrfile_version" \
+    xdrfile_root="/apps/xdrfile"
 COPY install_protobuf.sh install_eigen.sh install_nsync.sh install_absl.sh install_xdrfile.sh copy_lib.sh "$source_dir"/
 RUN cd "$tensorflow_source" && \
       tensorflow/contrib/makefile/download_dependencies.sh && \
@@ -53,7 +55,7 @@ RUN cd "$tensorflow_source" && \
       sh -x install_protobuf.sh && \
       sh -x install_eigen.sh && \
       sh -x install_nsync.sh && \
-      sh -x install_absl.sh && \
+#      sh -x install_absl.sh && \
       sh -x copy_lib.sh && \
       sh -x install_xdrfile.sh 
 
