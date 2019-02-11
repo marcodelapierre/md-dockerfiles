@@ -12,6 +12,7 @@ RUN apt-get clean all && \
       curl \
       git \
       libtool \
+      rsync \
       unzip \
       vim \
     && apt-get clean all && \
