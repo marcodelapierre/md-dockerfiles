@@ -8,7 +8,7 @@ cd ${source_dir}/lammps-${lammps_version}/src/
 cp -r $deepmd_source/source/build/USER-DEEPMD .
 
 #Patch for OpenMP and for CPU architecture
-sed -i -e '/CCFLAGS.*=/ s/$/ -fopenmp -march=haswell/g' MAKE/Makefile.mpi
+sed -i -e '/CCFLAGS.*=/ s/$/ -fopenmp -march=haswell/g' -e '/LINKFLAGS.*=/ s/$/ -fopenmp/g' MAKE/Makefile.mpi
 
 #Now build Lammps
 make yes-manybody
