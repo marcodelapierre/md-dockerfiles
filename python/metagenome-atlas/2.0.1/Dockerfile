@@ -12,7 +12,8 @@ RUN apt-get clean all && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN conda install -y -c bioconda -c conda-forge metagenome-atlas
+ARG atlas_version="2.0.1"
+RUN conda install -y -c bioconda -c conda-forge metagenome-atlas="$atlas_version"
 
 RUN mkdir /databases && \
     chmod go+w /databases
