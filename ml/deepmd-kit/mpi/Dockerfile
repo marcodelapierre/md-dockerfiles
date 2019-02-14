@@ -88,7 +88,6 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     conda config --add channels conda-forge && \
     conda install -c conda-forge -y tensorflow="$tensorflow_version"
 
-ENV OMP_NUM_THREADS=1 \
-    PATH="${source_dir}/lammps-${lammps_version}/src:${deepmd_root}/bin:$PATH"
+ENV PATH="${source_dir}/lammps-${lammps_version}/src:${deepmd_root}/bin:$PATH"
 
 CMD ["/bin/bash"]
