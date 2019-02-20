@@ -25,7 +25,7 @@ if [ $# -gt 0 ] ; then
  args="$@"
 fi
 
-docker run --rm $flag \
+docker run --rm -i $flag \
 	-v $(echo ~):$(echo ~) -w $(pwd) \
 	$userflags \
 	$cont $cmd $args
