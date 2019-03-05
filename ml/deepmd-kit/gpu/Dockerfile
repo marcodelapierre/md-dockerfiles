@@ -17,10 +17,13 @@ RUN apt-get clean all && \
       libtool \
       make \
       patch \
+      python3 \
+      python3-pip \
       rsync \
       unzip \
       vim \
       wget \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 10 \
     && apt-get clean all && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -41,13 +44,14 @@ RUN wget https://github.com/bazelbuild/bazel/releases/download/"$bazel_version"/
     bash bazel-"$bazel_version"-installer-linux-x86_64.sh
 # install tensorflow C lib
 COPY install_input "$tensorflow_source"/
+
 RUN cd "$tensorflow_source" && \
     ./configure < install_input && \
     bazel build \
       -c opt \
       # --incompatible_load_argument_is_label=false \
       --copt=-mavx2 \
-      --config=cuda \
+      # --config=cuda \ ## already in install_input
       --verbose_failures \
       //tensorflow:libtensorflow_cc.so 
 

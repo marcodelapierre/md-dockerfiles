@@ -9,9 +9,16 @@ n
 n
 n
 n
-n
-n
 y
+9.2
+/usr/local/cuda
+7
+/usr
+n
 
--march=haswell
+
+n
+
+n
+-march=sandybridge
 n
