@@ -45,7 +45,11 @@ RUN wget https://github.com/bazelbuild/bazel/releases/download/"$bazel_version"/
 # install tensorflow C lib
 COPY install_input "$tensorflow_source"/
 
-RUN cd "$tensorflow_source" && \
+RUN cd /usr/local/cuda/lib64/stubs && \
+    ln -s libcuda.so libcuda.so.1 && \
+    OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH && \
+    export LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH && \
+    cd "$tensorflow_source" && \
     ./configure < install_input && \
     bazel build \
       -c opt \
@@ -53,7 +57,9 @@ RUN cd "$tensorflow_source" && \
       --copt=-mavx2 \
       # --config=cuda \ ## already in install_input
       --verbose_failures \
-      //tensorflow:libtensorflow_cc.so 
+      //tensorflow:libtensorflow_cc.so \
+    && export LD_LIBRARY_PATH=$OLD_LD_LIBRARY_PATH \
+    && rm /usr/local/cuda/lib64/stubs/libcuda.so.1
 
 # install the dependencies of tensorflow and xdrfile
 ARG xdrfile_version="1.1.4"
