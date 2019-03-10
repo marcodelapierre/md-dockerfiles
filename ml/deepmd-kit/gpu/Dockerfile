@@ -1,28 +1,20 @@
-FROM tf1.8
+ARG tf_base="marcodelapierre/tensorflow-gpu:1.8_cpp_deps"
+FROM ${tf_base}
 
 LABEL maintainer="Marco De La Pierre <marco.delapierre@pawsey.org.au>"
 
 ENV source_dir="/source"
-# download tensorflow
+
 ARG tensorflow_version="1.8"
 ENV tensorflow_source="/tensorflow" \
     tensorflow_root="/apps/tensorflow"
 
-ARG bazel_version="0.15"
-
-# install the dependencies of tensorflow and xdrfile
+# install xdrfile
 ARG xdrfile_version="1.1.4"
 ENV xdrfile_version="$xdrfile_version" \
     xdrfile_root="/apps/xdrfile"
-COPY install_protobuf.sh install_eigen.sh install_nsync.sh install_absl.sh install_xdrfile.sh copy_lib.sh "$source_dir"/
-RUN cd "$tensorflow_source" && \
-      tensorflow/contrib/makefile/download_dependencies.sh && \
-    cd "$source_dir" && \
-      sh -x install_protobuf.sh && \
-      sh -x install_eigen.sh && \
-      sh -x install_nsync.sh && \
-#      sh -x install_absl.sh && \
-      sh -x copy_lib.sh && \
+COPY install_xdrfile.sh "$source_dir"/
+RUN cd "$source_dir" && \
       sh -x install_xdrfile.sh
 
 # install deepmd
@@ -48,5 +40,7 @@ RUN cd "$source_dir" && \
 
 ENV PATH="${source_dir}/lammps-${lammps_version}/src:${deepmd_root}/bin:$PATH"
 
+VOLUME /data
+WORKDIR /data
 CMD ["/bin/bash"]
 

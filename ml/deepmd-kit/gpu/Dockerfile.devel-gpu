@@ -113,6 +113,23 @@ RUN LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH} \
     bazel build -c opt --copt=-mavx --config=cuda \
        tensorflow:libtensorflow_cc.so
 
+# install the dependencies of tensorflow
+ENV source_dir="/source"
+
+ARG tensorflow_version="1.8"
+ENV tensorflow_source="/tensorflow" \
+    tensorflow_root="/apps/tensorflow"
+
+COPY install_protobuf.sh install_eigen.sh install_nsync.sh install_absl.sh copy_lib.sh "$source_dir"/
+RUN cd "$tensorflow_source" && \
+      tensorflow/contrib/makefile/download_dependencies.sh && \
+    cd "$source_dir" && \
+      sh -x install_protobuf.sh && \
+      sh -x install_eigen.sh && \
+      sh -x install_nsync.sh && \
+#      sh -x install_absl.sh && \
+      sh -x copy_lib.sh
+
 #RUN rm -rf /tmp/pip && \
 #    rm -rf /root/.cache
 # Clean up pip wheel and Bazel cache when done.
