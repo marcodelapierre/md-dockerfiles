@@ -8,7 +8,7 @@ cd ${source_dir}/lammps-${lammps_version}/src/
 cp -r $deepmd_source/source/build/USER-DEEPMD .
 
 #Patch to enable OpenMP compile
-sed -i -e '/CCFLAGS.*=/ s/$/ -fopenmp/g' -e '/LINKFLAGS.*=/ s/$/ -fopenmp/g' MAKE/Makefile.gpu
+sed -e '/CCFLAGS.*=/ s/$/ -fopenmp/g' -e '/LINKFLAGS.*=/ s/$/ -fopenmp/g' MAKE/Makefile.serial >MAKE/Makefile.gpu
 
 #Now build Lammps
 make yes-manybody

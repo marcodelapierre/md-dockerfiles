@@ -1,4 +1,4 @@
-FROM tfgpu3b
+FROM tf1.8
 
 LABEL maintainer="Marco De La Pierre <marco.delapierre@pawsey.org.au>"
 
