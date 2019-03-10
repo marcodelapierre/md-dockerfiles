@@ -8,7 +8,7 @@ cd ${source_dir}/lammps-${lammps_version}/src/
 cp -r $deepmd_source/source/build/USER-DEEPMD .
 
 #Patch to enable OpenMP compile
-sed -e '/CCFLAGS.*=/ s/$/ -fopenmp/g' -e '/LINKFLAGS.*=/ s/$/ -fopenmp/g' MAKE/Makefile.serial >MAKE/Makefile.gpu
+sed -i -e '/CCFLAGS.*=/ s/$/ -fopenmp/g' -e '/LINKFLAGS.*=/ s/$/ -fopenmp/g' MAKE/Makefile.serial
 
 #Now build Lammps
 make yes-manybody
@@ -19,4 +19,4 @@ make yes-user-deepmd
 
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH}
 
-make gpu -j4
+make serial -j4
