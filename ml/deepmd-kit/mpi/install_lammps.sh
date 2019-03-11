@@ -14,7 +14,7 @@ sed -i -e '/CCFLAGS.*=/ s/$/ -fopenmp -march=haswell/g' -e '/LINKFLAGS.*=/ s/$/ 
 make yes-manybody
 make yes-mc
 make yes-rigid
-make yes-user-meamc
+make yes-user-meam
 make yes-user-deepmd
 # optimisation packages
 make yes-opt
