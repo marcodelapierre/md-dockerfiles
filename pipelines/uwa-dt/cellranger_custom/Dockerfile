@@ -1,6 +1,6 @@
 FROM centos:7
 
-LABEL maintainer="brian.skjerven@pawsey.org.au"
+LABEL maintainer="marco.delapierre@pawsey.org.au"
 
 # Install package dependencies
 RUN yum -y update \
