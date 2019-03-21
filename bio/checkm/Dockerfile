@@ -4,7 +4,7 @@ RUN conda update -y conda
 
 ARG VERSION="1.0.13=py27_1"
 RUN conda install -c conda-forge -c bioconda -y checkm-genome=${VERSION}
-RUN echo -e "cat << EOF\n/data/CheckM\nEOF\n" | checkm data setRoot
+RUN echo -e "cat << EOF\n/data/db_checkm\nEOF\n" | checkm data setRoot
 
 RUN mkdir /home/none && \
     mkdir /home/none/.cache && \
@@ -14,4 +14,5 @@ RUN mkdir /home/none && \
 ENV HOME="/home/none"
 
 VOLUME /data
+VOLUME /data/db_checkm
 WORKDIR /data
