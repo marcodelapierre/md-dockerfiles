@@ -1,17 +1,17 @@
-### BUILD STAGE
+FROM continuumio/miniconda:4.5.11
 
-FROM marcodelapierre/biobase-builder as builder
-
-MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
+RUN conda update -y conda
 
 ARG VERSION="1.0.13=py27_1"
-RUN conda install -n myconda checkm-genome=${VERSION}
+RUN conda install -c conda-forge -c bioconda -y checkm-genome=${VERSION}
+RUN echo -e "cat << EOF\n/data/CheckM\nEOF\n" | checkm data setRoot
 
+RUN mkdir /home/none && \
+    mkdir /home/none/.cache && \
+    cp -p $HOME/.bashrc $HOME/.profile /home/none/ && \
+    chmod -R go+w /home/none
 
-### PRODUCTION STAGE
+ENV HOME="/home/none"
 
-FROM marcodelapierre/biobase-runner as runner
-
-MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
-
-COPY --from=builder /opt/conda/envs/myconda /usr/local/
+VOLUME /data
+WORKDIR /data
