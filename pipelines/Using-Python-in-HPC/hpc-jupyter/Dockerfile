@@ -285,6 +285,7 @@ USER $NB_UID
 
 
 RUN conda install --yes \
+      ipyparallel \
       netCDF4 \
       pytables \
     && conda clean -tipsy && \
@@ -295,3 +296,6 @@ RUN conda install --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
+USER root
+RUN ipcluster nbextension enable
+USER $NB_UID
