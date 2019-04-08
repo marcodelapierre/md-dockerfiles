@@ -14,5 +14,4 @@ RUN mkdir /home/none && \
 ENV HOME="/home/none"
 
 VOLUME /data
-VOLUME /data/db_checkm
 WORKDIR /data
