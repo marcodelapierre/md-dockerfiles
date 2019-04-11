@@ -286,6 +286,7 @@ USER $NB_UID
 
 RUN conda install --yes \
       ipyparallel \
+      joblib \
       netCDF4 \
       pytables \
     && conda clean -tipsy && \
