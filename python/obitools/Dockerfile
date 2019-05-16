@@ -18,8 +18,9 @@ RUN mkdir /apps && \
     wget https://pythonhosted.org/OBITools/_downloads/get-obitools.py && \
     python get-obitools.py 
 
-ENV PATH="/apps/OBITools-1.2.13/export/bin:$PATH" \
-    MANPATH="/apps/OBITools-1.2.13/export/share/man:$MANPATH"
+ARG VER="1.2.13"
+ENV PATH="/apps/OBITools-${VER}/export/bin:$PATH" \
+    MANPATH="/apps/OBITools-${VER}/export/share/man:$MANPATH"
 
 RUN mkdir /home/none && \
     mkdir /home/none/.cache && \
@@ -30,3 +31,4 @@ ENV HOME="/home/none"
 VOLUME /data
 WORKDIR /data
 
+CMD ["/bin/bash"]
