@@ -3,14 +3,14 @@
 type="$(basename $0)"
 type="${type%.sh}"
 
-if [ "$type" == "anaconda" ] ; then
- cont="continuumio/anaconda:5.3.0"
-elif [ "$type" == "anaconda3" ] ; then
- cont="continuumio/anaconda3:5.3.0"
-elif [ "$type" == "conda" ] ; then
- cont="continuumio/miniconda:4.5.11"
+if [ "$type" == "anaconda2" ] ; then
+ cont="continuumio/anaconda2:2019.07"
+elif [ "$type" == "anaconda" ] ; then
+ cont="continuumio/anaconda3:2019.07"
+elif [ "$type" == "conda2" ] ; then
+ cont="continuumio/miniconda2:4.6.14"
 else
- cont="continuumio/miniconda3:4.5.11"
+ cont="continuumio/miniconda3:4.6.14"
 fi
 
 docker run --rm -it \
