@@ -15,14 +15,18 @@ else
  cont="rocker/rstudio:3.5.1"
 fi
 
-docker stop rstudio &>/dev/null
-PASS="$((RANDOM))rstudiopwd$((RANDOM))"
-echo $PASS |pbcopy
-docker run --rm -d \
-	-p 8787:8787 -e PASSWORD=$PASS \
-	-v ~/Documents/rstudio:/home/rstudio/data \
-	-e USERID=$UID \
-	--name rstudio \
-	$cont &>/dev/null
-sleep 5
-open -a /Applications/Safari.app http://localhost:8787
+if [ $# -gt 0 ] && [ "$1" == "stop" ] ; then
+ docker stop rstudio
+else
+ docker stop rstudio &>/dev/null
+ PASS="$((RANDOM))rstudiopwd$((RANDOM))"
+ echo $PASS |pbcopy
+ docker run --rm -d \
+ 	-p 8787:8787 -e PASSWORD=$PASS \
+ 	-v ~/Documents/rstudio:/home/rstudio/data \
+ 	-e USERID=$UID \
+ 	--name rstudio \
+ 	$cont &>/dev/null
+ sleep 5
+ open -a /Applications/Safari.app http://localhost:8787
+fi

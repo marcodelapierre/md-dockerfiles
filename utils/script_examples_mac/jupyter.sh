@@ -17,13 +17,18 @@ else
  cont="jupyter/datascience-notebook"
 fi
 
-docker stop jupyter &>/dev/null
-docker run --rm -d \
-	-p 8888:8888 \
-	-v ~/Documents/jupyter:/home/jovyan/data \
-	-u $(id -u):$(id -g) --group-add users \
-	--name jupyter \
-	$cont &>/dev/null
-sleep 5
-( docker logs jupyter 3>&1 1>/dev/null 2>&3- ) | grep token= | tail -1 | cut -d '=' -f 2 | pbcopy
-open -a /Applications/Safari.app http://localhost:8888
+if [ $# -gt 0 ] && [ "$1" == "stop" ] ; then
+ docker stop jupyter
+else
+ docker stop jupyter &>/dev/null
+ docker run --rm -d \
+ 	-p 8888:8888 \
+ 	-v ~/Documents/jupyter:/home/jovyan/data \
+ 	-u $(id -u):$(id -g) --group-add users \
+     "$@" \
+ 	--name jupyter \
+ 	$cont &>/dev/null
+ sleep 5
+ ( docker logs jupyter 3>&1 1>/dev/null 2>&3- ) | grep token= | tail -1 | cut -d '=' -f 2 | pbcopy
+ open -a /Applications/Safari.app http://localhost:8888
+fi
