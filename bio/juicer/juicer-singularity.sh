@@ -11,6 +11,9 @@ cluster="CPU"
 
 
 
+# changes usually not required past this point
+juicer_container="docker://marcodelapierre/juicer:27Aug19"
+
 export SINGULARITY_BINDPATH="${SINGULARITY_BINDPATH},$workspace"
 
 if [ "$cluster" != "CPU" ] ; then
@@ -24,19 +27,18 @@ if [ "$topdir" != "$juicerdir" ] ; then
   fi
 fi
 
-#  marcodelapierre/juicer:27Aug19 \
 singularity exec \
-  $SYMAGES/juicer_27Aug19.sif \
+  $juicer_container \
   bash -c " \
     ln -s /apps/juicer/$cluster ${topdir}/scripts && \
     ${topdir}/scripts/juicer.sh -d $topdir -D $topdir "$@" ; \
-    rm ${topdir}/scripts \
+    rm -f ${topdir}/scripts \
     "
 
 if [ "$topdir" != "$juicerdir" ] ; then
-  rm ${topdir}/references
+  rm -f ${topdir}/references
   if [ -d ${juicerdir}/restriction_sites ] ; then
-    rm ${topdir}/restriction_sites
+    rm -f ${topdir}/restriction_sites
   fi
 fi
 
