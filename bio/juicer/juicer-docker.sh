@@ -12,7 +12,7 @@ cluster="CPU"
 
 
 # changes usually not required past this point
-juicer_container="marcodelapierre/juicer:27Aug19"
+juicer_container="marcodelapierre/juicer:27Aug19-cpu"
 
 if [ "$cluster" != "CPU" ] ; then
   cluster="${cluster}/scripts"

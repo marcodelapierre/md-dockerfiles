@@ -12,7 +12,7 @@ cluster="CPU"
 
 
 # changes usually not required past this point
-juicer_container="docker://marcodelapierre/juicer:27Aug19"
+juicer_container="docker://marcodelapierre/juicer:27Aug19-cpu"
 
 export SINGULARITY_BINDPATH="${SINGULARITY_BINDPATH},$workspace"
 
