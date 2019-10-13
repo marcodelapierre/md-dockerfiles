@@ -7,20 +7,19 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y \
+		pandoc \
 		texlive-full \
 		vim \
 	&& apt-get clean all && \
 	apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir /data
+RUN mkdir -p /home/none/.cache && \
+    cp -p $HOME/.bashrc $HOME/.profile /home/none/ && \
+    chmod -R go+w /home/none
+ENV HOME="/home/none"
 
-RUN useradd --create-home --shell /bin/bash --user-group --uid 1000 gnu && \
-	echo `echo "gnu\ngnu\n" | passwd gnu` && \
-	chown gnu:gnu /data
-USER gnu
-
-VOLUME ["/data"]
+VOLUME /data
 WORKDIR /data
 
 CMD ["/bin/bash"]
