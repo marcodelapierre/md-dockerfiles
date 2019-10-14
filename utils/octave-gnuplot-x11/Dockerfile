@@ -2,7 +2,8 @@ FROM ubuntu:18.04
 
 MAINTAINER Marco De La Pierre <marco.delapierre@pawsey.org.au>
 
-RUN apt-get clean all && \
+RUN export DEBIAN_FRONTEND=noninteractive && \
+	apt-get clean all && \
 	apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y \
@@ -14,19 +15,16 @@ RUN apt-get clean all && \
 	apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN mkdir -p /home/none/.cache && \
+	cp -p $HOME/.bashrc $HOME/.profile /home/none/ && \
+	chmod -R go+w /home/none
+ENV HOME="/home/none"
+
 ENV GNUTERM=x11
+RUN echo "set colors classic" >/home/none/.gnuplot && \
+	echo "setenv (\"GNUTERM\", \"X11\")" >/home/none/.octaverc
 
-RUN mkdir /data
-
-RUN useradd --create-home --shell /bin/bash --user-group --uid 1000 gnu && \
-	echo `echo "gnu\ngnu\n" | passwd gnu` && \
-	chown gnu:gnu /data
-USER gnu
-
-RUN echo "set colors classic" >~/.gnuplot && \
-	echo "setenv (\"GNUTERM\", \"X11\")" >~/.octaverc
-
-VOLUME ["/data"]
+VOLUME /data
 WORKDIR /data
 
 CMD ["/bin/bash"]
