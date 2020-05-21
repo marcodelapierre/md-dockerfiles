@@ -7,22 +7,26 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 	apt-get update && \
 	apt-get upgrade -y && \
 	apt-get install -y \
+		less \
 		vim \
 		xauth \
 		gnuplot \
-		octave \
 	&& apt-get clean all && \
 	apt-get purge && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /home/none/.cache && \
-	cp -p $HOME/.bashrc $HOME/.profile /home/none/ && \
-	chmod -R go+w /home/none
-ENV HOME="/home/none"
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y \
+        octave \
+    && apt-get clean all && \
+    apt-get purge && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV GNUTERM=x11
-RUN echo "set colors classic" >/home/none/.gnuplot && \
-	echo "setenv (\"GNUTERM\", \"X11\")" >/home/none/.octaverc
+RUN gnuplot_ver=$( gnuplot -V | cut -d ' ' -f 2 ) && \
+    echo "\nset colors classic" >>/usr/share/gnuplot/gnuplot/${gnuplot_ver}/gnuplotrc && \
+    echo "\nsetenv (\"GNUTERM\", \"X11\")" >>/usr/share/octave/site/m/startup/octaverc
 
 VOLUME /data
 WORKDIR /data
