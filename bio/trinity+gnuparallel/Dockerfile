@@ -1,4 +1,5 @@
-FROM trinityrnaseq/trinityrnaseq:2.8.6
+ARG TRINITY_VER="2.8.6"
+FROM trinityrnaseq/trinityrnaseq:${TRINITY_VER}
 
 ARG GNUPAR_VER="20191022"
 
