@@ -22,5 +22,5 @@ RUN mkdir -p /.singularity.d/env/ && \
 RUN /bin/mv /bin/sh /bin/sh.original && /bin/ln -s /bin/bash /bin/sh
 
 # Entrypoint needed for login tasks with Docker
-ENTRYPOINT [ "/bin/bash", "-l", "-c" ]
+ENTRYPOINT [ "/bin/bash", "-l", "-c", "$*", "--" ]
 CMD [ "/bin/bash" ]
